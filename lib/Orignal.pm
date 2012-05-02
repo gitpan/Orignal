@@ -1,6 +1,6 @@
 require 5.006_001;
 BEGIN {
-  $Orignal::VERSION = "0.01";
+  $Orignal::VERSION = "0.02";
 }
 package Orignal;
 use Carp();
@@ -14,6 +14,8 @@ use strict;
 use warnings;
 sub attributes {
     my $class = shift;
+    
+  
     # Make sure it is not called out of a 'modual' context;
     Carp::croak("ERROR: Orignal::$class->attributes, Somehow you managed to call this outside a modual!") if (ref($class));
     my $self = {};
@@ -47,7 +49,6 @@ sub new {
     my $class = shift;
     my $self = {};
     bless( $self, ( ref($class) || $class ) );
-#    print(ref($self)." new=".Dumper(\@_)."\n");
     $self->_initialize(@_);
     return( $self );
 }
@@ -363,11 +364,13 @@ sub _install_ordered_hashes {
 			  my (\$index) = \@_;
 			  my \$return_count = 0;
 			  if (ref(\$index) eq 'ARRAY') {
+			     \$self->validate_$field(\$index)
+		  	        if \$self->can('validate_$field');
 			     \$return_count = push( \@{ \$self->{$field}{ARRAY}}, \@{\$index} );
 			  }
 			  else {
 			     foreach my \$val (\@_) {
-				\$self->validate_$field(\$val)
+			       \$self->validate_$field(\$val)
 		  	          if \$self->can('validate_$field');
 			       \$return_count = push( \@{ \$self->{$field}{ARRAY}}, \$val );
 			     }
@@ -384,6 +387,8 @@ sub _install_ordered_hashes {
 			   my (\$index) = \@_;
 			   my \$return_count = 0;
 			   if (ref(\$index) eq 'ARRAY') {
+			     \$self->validate_$field(\$index)
+		  	        if \$self->can('validate_$field');
 			     \$return_count = unshift( \@{ \$self->{$field}{ARRAY}}, \@{\$index} );
 			   }
 			   else {
@@ -463,7 +468,7 @@ Orignal - Very simple properties/attributes/fields for Perl
      
 =head1 DESCRIPTION
 
-When I said very simple I meant it. It basically just gives you a very easy way to create class level attributes that
+When I said simple I meant very simple. It basically just gives you a very easy way to create class level attributes that
 encapsulate class data, enforcing unique field names and has the added bonus of an
 ordered hash.
 
@@ -807,18 +812,25 @@ See the examples below;
        ref($new_address) eq 'ARRAY' || die("ERROR: SomeMode::House::address, must be an 'ARRAY' Ref.");
          
    }
+
+
+=head1 CONTRIBUTING 
+If you like Orignal and want to add to it or just complain. The source is available on GitHub at https://github.com/byterock/Orignal
    
 =head1 Bugs
 
-I haven't found any but I am sure there are?
+I haven't found any but I am sure there are?  You can report them here https://rt.cpan.org/Public/Dist/Display.html?Name=Orignal or 
+here https://github.com/byterock/Orignal/issues.
 
 =head1 SUPPORT
 
-No support is available but a list is coming soon
+Now there is a Wiki, but nothing there yet https://github.com/byterock/Orignal/wiki.
 
 =head1 AUTHOR
 
 John Scoles.
+
+https://github.com/byterock/Orignal
 
 =head1 COPYRIGHT AND LICENSE ^
 

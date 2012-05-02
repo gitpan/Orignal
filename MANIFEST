@@ -3,7 +3,7 @@ MANIFEST
 Makefile.PL
 README
 lib/Orignal.pm
-t/00_load.t
+t/00-load.t
 t/01_base.t
 t/02_scalar.t
 t/03_hash.t
@@ -11,6 +11,6 @@ t/04_ordered_hash.t
 t/05_array.t
 t/06_mix_match.t
 t/manifest.t
-t/pod_coverage.t
+t/pod-coverage.t
 t/pod.t
 META.yml                                 Module meta-data (added by MakeMaker)

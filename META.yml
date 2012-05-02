@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Orignal
-version:            0.01
+version:            0.02
 abstract:           Very simple properties/attributes/fields for Perl
 author:
     - John Scoles <byterock@hotmail.com>
