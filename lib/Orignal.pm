@@ -1,6 +1,6 @@
 require 5.006_001;
 BEGIN {
-  $Orignal::VERSION = "0.02";
+  $Orignal::VERSION = "0.03";
 }
 package Orignal;
 use Carp();
@@ -237,9 +237,10 @@ sub _install_ordered_hashes {
 			      \$self->validate_$field(\$index)
 			         if \$self->can('validate_$field');
 			      foreach my \$key (keys(\%\$index)){
-				 \$self->{$field}{HASH}{\$key} = \$index->{\$key};
-				 push(\@{\$self->{$field}{ARRAY}},\$key);
-			      }
+			        push(\@{\$self->{$field}{ARRAY}},\$key)
+			          unless (exists(\$self->{$field}{HASH}{\$key}));
+			        \$self->{$field}{HASH}{\$key} = \$index->{\$key};
+			      }                  
 			   }
 			   return(wantarray ? \%{\$self->{$field}{HASH}} : scalar(\%{\$self->{$field}{HASH}}));
 			}
@@ -539,7 +540,7 @@ names.
        
 This will return the attribute hash ref used in the creation of the class.
  
-  my $attrb = $big_house->attributes(); 
+  my $attrb = $big_house->my_attributes(); 
   
   $attrb would point to this hash  
 		    {SCALARS 	    =>['address','style','type'],
@@ -556,7 +557,7 @@ Simple Perl scalars.
 
 =head4 Getter
 
-A plerlish getter for these that uses the field name.
+A perlish getter for these that uses the field name.
 
   print $big_house->address();
 
@@ -815,22 +816,23 @@ See the examples below;
 
 
 =head1 CONTRIBUTING 
-If you like Orignal and want to add to it or just complain. The source is available on GitHub at https://github.com/byterock/Orignal
+If you like Orignal and want to add to it or just complain. 
+The source is available on GitHub at L<https://github.com/byterock/Orignal>
    
 =head1 Bugs
 
-I haven't found any but I am sure there are?  You can report them here https://rt.cpan.org/Public/Dist/Display.html?Name=Orignal or 
-here https://github.com/byterock/Orignal/issues.
+I haven't found any but I am sure there are?  You can report them here L<https://rt.cpan.org/Public/Dist/Display.html?Name=Orignal> or 
+here L<https://github.com/byterock/Orignal/issues>.
 
 =head1 SUPPORT
 
-Now there is a Wiki, but nothing there yet https://github.com/byterock/Orignal/wiki.
+Now there is a Wiki, but nothing there yet L<https://github.com/byterock/Orignal/wiki>.
 
 =head1 AUTHOR
 
 John Scoles.
 
-https://github.com/byterock/Orignal
+L<https://github.com/byterock/Orignal>
 
 =head1 COPYRIGHT AND LICENSE ^
 
