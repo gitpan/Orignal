@@ -1,5 +1,9 @@
 Revision history for Orignal
 
+0.04    2014-03-01
+	- Another test not correct have '=' when should have '=='
+	- Fixe POD NAME
+
 0.03    2014-03-01
 
         - Fixed the heading for abstract section in pod

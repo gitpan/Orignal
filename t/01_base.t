@@ -31,7 +31,7 @@ ok($base_test->my_attributes(),"got attributes");
 
 foreach my $key (keys(%attrs)){
     foreach my $index (0..3) {
-        cmp_ok($meta->{$key}->[$index], "=",$attrs{$key}->[$index]," I have a ".$attrs{$key}->[$index]);
+        cmp_ok($meta->{$key}->[$index], "eq" ,$attrs{$key}->[$index]," I have a ".$attrs{$key}->[$index]);
     }
 }
 
